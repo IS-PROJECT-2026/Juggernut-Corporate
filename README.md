@@ -1,31 +1,9 @@
 # Juggernut-Corporate
 
 # THE AGILE LAB: CORPORATE "ABOUT ME" RELAY
-
-## THE CORE RULE: THE DEVELOPMENT TOKEN
-Only ONE person per team may edit files or push code at any given second. 
-Before you type a single word or open a file, you MUST run: git pull origin main
-
-NOTE: This sequential rule applies strictly to today's session because the 
-current lab scope focuses entirely on mastering clean workflow pipelines 
-and does not cover the resolution of merge conflicts.
-
----
-
-## PHASE 1: THE TEAM ROSTER (README.md)
-
-### Student 1 (The Founder)
-1. Clone the repository to your laptop:
-   git clone [your-repository-url]
-2. Open the folder in VS Code.
-3. Replace the text in README.md with your corporate details:
-   * # [Insert Creative Business Name]
-   * ## Company Vision
-   * [Write a 2-sentence description of what your tech firm specializes in]
-4. Stage, commit, and push your changes:
-   git add .
-   git commit -m "docs: initialize business name and vision"
-   git push origin main
+   * # JUGGERNUT
+   * ## Bold and Industry-Dominating
+   * To become an unstoppable force of innovation that redefines the boundaries of our industry. Through relentless grit and groundbreaking solutions, we will empower businesses worldwide to crush their limitations and achieve monumental growth. 
 
 ### Students 2, 3, 4, & 5 (The Executives)
 Execute this sequentially, one-by-one (Student 2 finishes completely before Student 3 begins):
