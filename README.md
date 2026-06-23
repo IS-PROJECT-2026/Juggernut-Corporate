@@ -1,18 +1,13 @@
 # Juggernut-Corporate
    * # JUGGERNUT
-   * ## Bold and Industry-Dominating
-   * To become an unstoppable force of innovation that redefines the boundaries of our industry. Through relentless grit and groundbreaking solutions, we will empower businesses worldwide to crush their limitations and achieve monumental growth. 
+   * ## Big, Bold and Industry-Dominating
+   * To become an unstoppable force of innovation that redefines the boundaries of our industry. Through relentless grit and groundbreaking solutions, we will empower businesses worldwide to crush their obstacles and achieve monumental growth. 
 
-### Students 2, 3, 4, & 5 (The Executives)
-Execute this sequentially, one-by-one (Student 2 finishes completely before Student 3 begins):
-1. Update your local files immediately:
-   git pull origin main
-2. Open README.md and append your corporate title to the bottom of the roster:
-   * **[Your Name]** - [Insert Executive Title, e.g., Chief Technology Officer]
-3. Stage, commit, and push:
-   git add .
-   git commit -m "docs: add [Your Name] to company roster"
-   git push origin main
+### The Executives
+* **Princess Imelda Odato** - Chief Executive Officer
+* **Peter  Wachira** - Vice Chair
+* **Ryan Matu** - Chief Financial Officer
+* **Samuel Kahiga** - Head of Operations
 
 ---
 
