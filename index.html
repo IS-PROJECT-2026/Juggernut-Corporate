@@ -4,41 +4,312 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Executive Team Profiles</title>
+    <style>
+        /* ── SYSTEM DESIGN SYSTEM ─────────────────────────────────────────── */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg-dark: #0B0F19;
+            --card-bg: rgba(22, 30, 49, 0.7);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text-primary: #F3F4F6;
+            --text-secondary: #9CA3AF;
+            --accent-glow: #3B82F6;
+            --accent-cyan: #06B6D4;
+            --transition: all 0.35s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 60px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            -webkit-font-smoothing: antialiased;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(59, 130, 246, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+        }
+
+        /* ── HEADER ARCHITECTURE ─────────────────────────────────────────── */
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            max-width: 600px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #FFFFFF 30%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        /* ── INTERACTIVE MATRIX GRID ─────────────────────────────────────── */
+        .grid-container {
+            width: 100%;
+            max-width: 1140px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 24px;
+        }
+
+        /* ── CARD INTERACTIONS & ANIMATIONS ──────────────────────────────── */
+        .profile-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: var(--transition);
+        }
+
+        /* Hover lift and glow effect */
+        .profile-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(59, 130, 246, 0.3);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 
+                        0 0 20px rgba(59, 130, 246, 0.1);
+        }
+
+        /* Interactive corner gradient reveal */
+        .profile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-glow), var(--accent-cyan));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .profile-card:hover::before {
+            opacity: 1;
+        }
+
+        /* Profile Header Component */
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            letter-spacing: -0.3px;
+        }
+
+        /* Status Dot Indicator */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #10B981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10B981;
+            position: relative;
+        }
+
+        /* Profile Body Bio */
+        .bio {
+            font-size: 0.925rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        /* Tech Stack Pill Formatting */
+        .tech-section {
+            margin-bottom: 20px;
+        }
+
+        .tech-title, .project-title {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.4);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tag {
+            font-size: 0.75rem;
+            font-family: monospace;
+            background: rgba(255, 255, 255, 0.05);
+            color: #E5E7EB;
+            padding: 4px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            transition: var(--transition);
+        }
+
+        .profile-card:hover .tag {
+            background: rgba(59, 130, 246, 0.1);
+            color: #93C5FD;
+            border-color: rgba(59, 130, 246, 0.15);
+        }
+
+        /* Focus Project Styling */
+        .project-section {
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 16px;
+            margin-top: auto;
+        }
+
+        .project-desc {
+            font-size: 0.870rem;
+            line-height: 1.45;
+            color: #D1D5DB;
+        }
+
+        /* Accessibility Override */
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; transform: none !important; }
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Corporate Executive Directory</h1>
-    <p>Meet the engineering minds driving our technical operations.</p>
+    <header>
+        <h1>Corporate Executive Directory</h1>
+        <p>Meet the engineering minds driving our technical operations.</p>
+    </header>
 
-    <!-- TEAM PROFILES GO BELOW THIS LINE -->
-    <section>
-    <h2>Rob Ryan</h2>
+    <!-- TEAM PROFILES WRAPPED IN A INTERACTIVE MATRIX GRID -->
+    <main class="grid-container">
 
-    <p><strong>Professional Bio:</strong> I am a software engineering student passionate about machine learning and DevOps.</p>
+        <!-- ROB RYAN -->
+        <section class="profile-card">
+            <div class="card-header">
+                <h2>Rob Ryan</h2>
+                <div class="status-dot" title="Active Core Engineer"></div>
+            </div>
+            <p class="bio">I am a software engineering student passionate about machine learning and DevOps.</p>
+            
+            <div class="tech-section">
+                <p class="tech-title">Core Tech Stack</p>
+                <div class="tech-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">Python</span>
+                </div>
+            </div>
 
-    <p><strong>Core Tech Stack:</strong> Java, Javascript, Python</p>
+            <div class="project-section">
+                <p class="project-title">Key Project Focus</p>
+                <p class="project-desc">Integrating Existing Applications to the cloud.</p>
+            </div>
+        </section>
 
-    <p><strong>Key Project Focus:</strong> Integrating Existing Applications to the cloud.</p>
-</section>
-<section>
-    <h2>Samuel Yashin</h2>
+        <!-- PRINCESS IMELDA -->
+        <section class="profile-card">
+            <div class="card-header">
+                <h2>Princess Imelda</h2>
+                <div class="status-dot" title="Active Core Engineer"></div>
+            </div>
+            <p class="bio">I am a Machine Learning Engineer passionate about the world of data.</p>
+            
+            <div class="tech-section">
+                <p class="tech-title">Core Tech Stack</p>
+                <div class="tech-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">R</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">JavaScript</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Docker</span>
+                </div>
+            </div>
+            <div class="project-section">
+                <p class="project-title">Key Project Focus</p>
+                <p class="project-desc">Creating a feature for automated alerts, both online and offline.</p>
+            </div>
+        </section>
+        <a href = "princess-about-me.html">My Profile</a>
 
-    <p><strong>Professional Bio:</strong> I am a software engineering student passionate about low-level systems, backend engineering, and high-performance networking. I enjoy designing scalable and reliable software architectures.</p>
+        <!-- SAMUEL YASHIN -->
+        <section class="profile-card">
+            <div class="card-header">
+                <h2>Samuel Yashin</h2>
+                <div class="status-dot" title="Active Core Engineer"></div>
+            </div>
+            <p class="bio">I am a software engineering student passionate about low-level systems, backend engineering, and high-performance networking. I enjoy designing scalable and reliable software architectures.</p>
+            
+            <div class="tech-section">
+                <p class="tech-title">Core Tech Stack</p>
+                <div class="tech-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">C++</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">PostgreSQL</span>
+                </div>
+            </div>
 
-    <p><strong>Core Tech Stack:</strong> Java, C++, Python, PostgreSQL</p>
+            <div class="project-section">
+                <p class="project-title">Key Project Focus</p>
+                <p class="project-desc">Optimizing a reactive healthcare platform for scalability and fault tolerance.</p>
+            </div>
+        </section>
 
-    <p><strong>Key Project Focus:</strong> Optimizing a reactive healthcare platform for scalability and fault tolerance.</p>
-</section>
+        <!-- MUTUNGA ERIC -->
+        <section class="profile-card">
+            <div class="card-header">
+                <h2>Mutunga Eric</h2>
+                <div class="status-dot" title="Active Core Engineer"></div>
+            </div>
+            <p class="bio">I am a Computer Science student with a strong interest in backend engineering, distributed systems, and scalable software architecture. I enjoy solving complex problems and building reliable applications with clean, maintainable code.</p>
+            
+            <div class="tech-section">
+                <p class="tech-title">Core Tech Stack</p>
+                <div class="tech-tags">
+                    <span class="tag">Java</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">C++</span>
+                    <span class="tag">Spring Boot</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">Git</span>
+                </div>
+            </div>
 
-<section>
-    <h2>Mutunga Eric</h2>
+            <div class="project-section">
+                <p class="project-title">Key Project Focus</p>
+                <p class="project-desc">Building high-performance backend systems, including a reactive healthcare platform designed for scalability, resilience, and fault tolerance.</p>
+            </div>
+        </section>
 
-    <p><strong>Professional Bio:</strong> I am a Computer Science student with a strong interest in backend engineering, distributed systems, and scalable software architecture. I enjoy solving complex problems and building reliable applications with clean, maintainable code.</p>
-
-    <p><strong>Core Tech Stack:</strong> Java, Python, C++, Spring Boot, PostgreSQL, Git</p>
-
-    <p><strong>Key Project Focus:</strong> Building high-performance backend systems, including a reactive healthcare platform designed for scalability, resilience, and fault tolerance.</p>
-</section>
+    </main>
 
 </body>
 </html>
