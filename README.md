@@ -7,6 +7,7 @@
 * **Peter  Wachira** - Vice Chair
 * **Ryan Matu** - Chief Financial Officer
 * **Samuel Kahiga** - Head of Operations
+* **Mutunga Eric Musyimi** - Chief Technology Officer
 
 ---
 
