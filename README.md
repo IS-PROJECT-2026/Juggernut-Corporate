@@ -10,6 +10,7 @@
 * **Mutunga Eric Musyimi** - Chief Technology Officer
 
 ---
+# LIVE Demo: https://is-project-2026.github.io/Juggernut-Corporate/
 
 ## PHASE 2: THE "ABOUT ME" CODEBASE (index.html)
 
