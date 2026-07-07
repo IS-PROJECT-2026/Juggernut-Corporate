@@ -8,6 +8,7 @@
 * **Ryan Matu** - Chief Financial Officer
 * **Samuel Kahiga** - Head of Operations
 * **Mutunga Eric Musyimi** - Chief Technology Officer
+* **Munyirwa Joshua Kitto** - Chief Operating Officer
 
 ---
 # LIVE Demo: https://is-project-2026.github.io/Juggernut-Corporate/
